@@ -36,3 +36,5 @@ class Kernel extends BaseKernel
         }
     }
 }
+
+//$kernel = new Kernel();
