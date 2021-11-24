@@ -54,7 +54,11 @@ class User
      */
     public function isValidPassword()
     {
-        return false === strpos($this->password, $this->firstName);
+        if ($this->password && $this->firstName) {
+            return false === strpos($this->password, $this->firstName);
+        }
+        
+        return true;
     }
 
     public function getId(): ?int
