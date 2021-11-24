@@ -40,6 +40,7 @@ final class OmdbApi
 
     public function __construct(HttpClientInterface $omdbClient, string $omdbToken, string $omdbHost)
     {
+        
         $this->token = $omdbToken;
         $this->host = $omdbHost;
         $this->httpClient = $omdbClient;
