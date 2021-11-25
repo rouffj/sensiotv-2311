@@ -9,7 +9,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\OmdbApi;
 use App\Entity\Movie;
 use App\Repository\MovieRepository;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
@@ -20,10 +19,12 @@ class MovieController extends AbstractController
 {
     private OmdbApi $omdbApi;
     
-    public function __construct(HttpClientInterface $httpClient)
+    public function __construct(OmdbApi $omdbApi)
     {
-        $this->omdbApi = new OmdbApi($httpClient, '28c5b7b1', 'https://www.omdbapi.com');
+        $this->omdbApi = $omdbApi;
+        //$this->omdbApi = new OmdbApi($httpClient, '28c5b7b1', 'https://www.omdbapi.com');
     }
+    
     /**
      * @Route("/", name="movie")
      */

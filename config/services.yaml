@@ -11,6 +11,12 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
+        #option 3
+        bind:
+            #$omdbToken: '28c5b7b1'
+            #$omdbHost: 'https://www.omdbapi.com'            
+            
+
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
@@ -23,3 +29,14 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # option2: Déclaration explicte et complète du service
+    App\OmdbApi:
+        $omdbToken: '%env(OMDB_API_TOKEN)%'
+        $omdbHost: 'https://www.omdbapi.com'
+
+    # option1: Déclaration explicte et complète du service
+    #App\OmdbApi:
+    #    $omdbClient: '@Symfony\Contracts\HttpClient\HttpClientInterface'
+    #    $omdbToken: '28c5b7b1'
+    #    $omdbHost: 'https://www.omdbapi.com'
