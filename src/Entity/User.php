@@ -6,6 +6,8 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -13,8 +15,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @UniqueEntity("email")
  * @UniqueEntity({"firstName", "lastName"})
  */
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    
+    use UserSecurityTrait;
+    
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -42,12 +47,6 @@ class User
      * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $phone;
-
-    /**
-     * @Assert\Length(min=6)
-     * @ORM\Column(type="string", length=255)
-     */
-    private $password;
 
     /**
      * @Assert\IsTrue(message="Le mot de passe ne doit pas contenir la valeur d'autres champs.")
@@ -110,18 +109,6 @@ class User
     public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
 
         return $this;
     }

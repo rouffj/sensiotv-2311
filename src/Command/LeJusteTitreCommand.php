@@ -45,7 +45,7 @@ class LeJusteTitreCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        
+ 
         $keyword = $input->getArgument('keyword');
         $movies = $this->omdbApi->requestAllBySearch($keyword);
         //dump($movies);
