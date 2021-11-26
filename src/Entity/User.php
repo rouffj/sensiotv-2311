@@ -100,6 +100,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    
+    public function getBirthday()
+    {
+        return new \DateTime('2000-01-01');
+    }
 
     public function getPhone(): ?string
     {

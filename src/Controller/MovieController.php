@@ -51,8 +51,11 @@ class MovieController extends AbstractController
     /**
      * @Route("/{id<\d+>}", name="show")
      */
-    public function show(int $id)
+    public function show(int $id, Movie $movie)
     {
+        dump($movie);
+        $this->denyAccessUnlessGranted('MOVIE_SHOW', $movie);
+        
         return $this->render('movie/show.html.twig', [
             'id' => $id,
         ]);
